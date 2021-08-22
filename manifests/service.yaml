@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wiki-local
+  namespace: wiki
+spec:
+  selector:
+    app: wiki.hanapoulpe.org
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 11080
+      protocol: TCP
+      targetPort: 3000
+    #- name: https
+    #  port: 11443
+    #  protocol: TCP
+    #  targetPort: 3443
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
